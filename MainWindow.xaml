@@ -77,6 +77,18 @@
                                       BorderThickness="1"
                                       Cursor="Hand"
                                       Click="MultiTabButton_Click" />
+                        <ToggleButton x:Name="TwitchTabButton"
+                                      Content="TWITCH"
+                                      IsChecked="False"
+                                      FontFamily="Consolas" FontSize="12" FontWeight="Bold"
+                                      Padding="14,5"
+                                      Margin="4,0,0,0"
+                                      Background="{StaticResource BrushBgCard}"
+                                      Foreground="{StaticResource BrushTextSecondary}"
+                                      BorderBrush="{StaticResource BrushBorder}"
+                                      BorderThickness="1"
+                                      Cursor="Hand"
+                                      Click="TwitchTabButton_Click" />
                     </StackPanel>
                 </Border>
             </StackPanel>
@@ -122,28 +134,23 @@
             <RowDefinition Height="Auto" />   <!-- 4  Contrôles spéciale -->
             <RowDefinition Height="Auto" />   <!-- 5  Historique spéciale -->
 
-            <!-- ── INTÉGRATION TWITCH ── -->
-            <RowDefinition Height="Auto" />   <!-- 6  Sep Twitch -->
-            <RowDefinition Height="Auto" />   <!-- 7  Label Twitch -->
-            <RowDefinition Height="Auto" />   <!-- 8  Contrôles Twitch -->
-
-            <RowDefinition Height="Auto" />   <!-- 9  Sep options -->
-            <RowDefinition Height="Auto" />   <!-- 10 Label toggle bonus -->
-            <RowDefinition Height="Auto" />   <!-- 11 Toggle buttons -->
+            <RowDefinition Height="Auto" />   <!-- 6  Sep options -->
+            <RowDefinition Height="Auto" />   <!-- 7  Label toggle bonus -->
+            <RowDefinition Height="Auto" />   <!-- 8  Toggle buttons -->
 
             <!-- ── TRACKER BOÎTE ── -->
-            <RowDefinition Height="Auto" />   <!-- 12 Sep boîte -->
-            <RowDefinition Height="Auto" />   <!-- 13 Titre map + labels boîte -->
-            <RowDefinition Height="Auto" />   <!-- 14 Box locations panel -->
-            <RowDefinition Height="Auto" />   <!-- 15 Reset buttons boîte -->
-            <RowDefinition Height="Auto" />   <!-- 16 Historique boîte -->
+            <RowDefinition Height="Auto" />   <!-- 9  Sep boîte -->
+            <RowDefinition Height="Auto" />   <!-- 10 Titre map + labels boîte -->
+            <RowDefinition Height="Auto" />   <!-- 11 Box locations panel -->
+            <RowDefinition Height="Auto" />   <!-- 12 Reset buttons boîte -->
+            <RowDefinition Height="Auto" />   <!-- 13 Historique boîte -->
 
             <!-- ── TRACKER BONUS ── -->
-            <RowDefinition Height="Auto" />   <!-- 17 Sep bonus -->
-            <RowDefinition Height="Auto" />   <!-- 18 Labels bonus -->
-            <RowDefinition Height="Auto" />   <!-- 19 Drops panel -->
-            <RowDefinition Height="Auto" />   <!-- 20 Reset buttons bonus -->
-            <RowDefinition Height="Auto" />   <!-- 21 Historique bonus -->
+            <RowDefinition Height="Auto" />   <!-- 14 Sep bonus -->
+            <RowDefinition Height="Auto" />   <!-- 15 Labels bonus -->
+            <RowDefinition Height="Auto" />   <!-- 16 Drops panel -->
+            <RowDefinition Height="Auto" />   <!-- 17 Reset buttons bonus -->
+            <RowDefinition Height="Auto" />   <!-- 18 Historique bonus -->
         </Grid.RowDefinitions>
 
         <!-- En-tête CHOIX DE LA MAP cliquable -->
@@ -280,106 +287,26 @@
             </StackPanel>
         </Border>
 
-        <!-- ═══════════════════════════════════════════════════════════ -->
-        <!-- INTÉGRATION TWITCH                                          -->
-        <!-- ═══════════════════════════════════════════════════════════ -->
-
+        <!-- Séparateur options -->
         <Rectangle Grid.Row="6" Fill="{StaticResource BrushBorder}" Margin="0,0,0,16" />
 
-        <TextBlock Grid.Row="7" Text="INTÉGRATION TWITCH"
-                   Style="{StaticResource SectionLabelStyle}" />
-
-        <StackPanel Grid.Row="8" Margin="0,0,0,16">
-
-            <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
-                <Button x:Name="TwitchConnectButton"
-                        Content="SE CONNECTER À TWITCH"
-                        Style="{StaticResource ResetButtonStyle}"
-                        Margin="0,0,10,0"
-                        Click="TwitchConnectButton_Click" />
-                <Button x:Name="TwitchDisconnectButton"
-                        Content="DÉCONNECTER"
-                        Style="{StaticResource ResetDangerButtonStyle}"
-                        Click="TwitchDisconnectButton_Click" />
-            </StackPanel>
-
-            <TextBlock x:Name="TwitchStatusText"
-                       Text="Non connecté."
-                       FontFamily="Consolas" FontSize="12"
-                       TextWrapping="Wrap"
-                       Foreground="{StaticResource BrushTextSecondary}"
-                       Margin="0,0,0,12" />
-
-            <StackPanel Orientation="Horizontal" Margin="0,0,0,8">
-                <TextBlock Text="Commande envoyée (met à jour Nightbot via !editcom) :"
-                           VerticalAlignment="Center"
-                           Foreground="{StaticResource BrushTextSecondary}"
-                           FontFamily="Consolas" FontSize="12"
-                           Margin="0,0,10,0" />
-                <TextBox x:Name="TwitchCommandTemplateBox"
-                         Width="220" Height="30"
-                         FontFamily="Consolas" FontSize="13"
-                         VerticalContentAlignment="Center"
-                         Background="{StaticResource BrushBgCard}"
-                         Foreground="{StaticResource BrushTextPrimary}"
-                         BorderBrush="{StaticResource BrushBorder}"
-                         BorderThickness="1"
-                         LostFocus="TwitchCommandTemplateBox_LostFocus" />
-            </StackPanel>
-
-            <CheckBox x:Name="TwitchAutoSendCheck"
-                      Content="Envoyer automatiquement dans le chat au clic ENREGISTRER / +4 / +5"
-                      Foreground="{StaticResource BrushTextSecondary}"
-                      FontFamily="Consolas" FontSize="12"
-                      Margin="0,0,0,10"
-                      Checked="TwitchAutoSendCheck_Changed"
-                      Unchecked="TwitchAutoSendCheck_Changed" />
-
-            <StackPanel Orientation="Horizontal" Margin="0,0,0,8">
-                <TextBlock Text="Commande à écouter dans le chat :"
-                           VerticalAlignment="Center"
-                           Foreground="{StaticResource BrushTextSecondary}"
-                           FontFamily="Consolas" FontSize="12"
-                           Margin="0,0,10,0" />
-                <TextBox x:Name="TwitchListenCommandBox"
-                         Width="120" Height="30"
-                         FontFamily="Consolas" FontSize="13"
-                         VerticalContentAlignment="Center"
-                         Background="{StaticResource BrushBgCard}"
-                         Foreground="{StaticResource BrushTextPrimary}"
-                         BorderBrush="{StaticResource BrushBorder}"
-                         BorderThickness="1"
-                         LostFocus="TwitchListenCommandBox_LostFocus" />
-            </StackPanel>
-
-            <CheckBox x:Name="TwitchListenEnabledCheck"
-                      Content="Répondre automatiquement quand un spectateur tape cette commande dans le chat"
-                      Foreground="{StaticResource BrushTextSecondary}"
-                      FontFamily="Consolas" FontSize="12"
-                      Checked="TwitchListenEnabledCheck_Changed"
-                      Unchecked="TwitchListenEnabledCheck_Changed" />
-        </StackPanel>
-
-        <!-- Séparateur options -->
-        <Rectangle Grid.Row="9" Fill="{StaticResource BrushBorder}" Margin="0,0,0,16" />
-
         <!-- Label toggle bonus -->
-        <TextBlock Grid.Row="10" Text="ACTIVER / DESACTIVER DES BONUS"
+        <TextBlock Grid.Row="7" Text="ACTIVER / DESACTIVER DES BONUS"
                    Style="{StaticResource SectionLabelStyle}" />
 
         <!-- Boutons toggle bonus -->
-        <WrapPanel x:Name="ToggleButtonsPanel" Grid.Row="11"
+        <WrapPanel x:Name="ToggleButtonsPanel" Grid.Row="8"
                    Orientation="Horizontal" Margin="0,0,0,20" />
 
         <!-- ═══════════════════════════════════════════════════════════ -->
         <!-- TRACKER CYCLE DE BOÎTE                                      -->
         <!-- ═══════════════════════════════════════════════════════════ -->
 
-        <Rectangle x:Name="BoxSeparator" Grid.Row="12"
+        <Rectangle x:Name="BoxSeparator" Grid.Row="6"
                    Fill="{StaticResource BrushBorder}"
                    Margin="0,0,0,16" Visibility="Collapsed" />
 
-        <StackPanel x:Name="BoxLabelPanel" Grid.Row="13"
+        <StackPanel x:Name="BoxLabelPanel" Grid.Row="7"
                     Margin="0,0,0,12" Visibility="Collapsed">
             <DockPanel Margin="0,0,0,6">
                 <TextBlock x:Name="MapTitleText"
@@ -400,11 +327,11 @@
                        Style="{StaticResource SectionLabelStyle}" Margin="0" />
         </StackPanel>
 
-        <WrapPanel x:Name="BoxLocationsPanel" Grid.Row="14"
+        <WrapPanel x:Name="BoxLocationsPanel" Grid.Row="8"
                    Orientation="Horizontal"
                    Margin="0,0,0,16" Visibility="Collapsed" />
 
-        <StackPanel x:Name="BoxResetButtonsPanel" Grid.Row="15"
+        <StackPanel x:Name="BoxResetButtonsPanel" Grid.Row="6"
                     Orientation="Horizontal"
                     Margin="0,0,0,20" Visibility="Collapsed">
             <Button x:Name="ResetBoxCycleButton"
@@ -419,7 +346,7 @@
         </StackPanel>
 
         <Border x:Name="BoxHistoryBox"
-                Grid.Row="16"
+                Grid.Row="7"
                 Background="{StaticResource BrushBgHistory}"
                 BorderBrush="{StaticResource BrushBorder}"
                 BorderThickness="1" CornerRadius="10"
@@ -436,11 +363,11 @@
         <!-- TRACKER CYCLE DE BONUS                                       -->
         <!-- ═══════════════════════════════════════════════════════════ -->
 
-        <Rectangle x:Name="BonusSeparator" Grid.Row="17"
+        <Rectangle x:Name="BonusSeparator" Grid.Row="8"
                    Fill="{StaticResource BrushBorder}"
                    Margin="0,0,0,16" Visibility="Collapsed" />
 
-        <StackPanel x:Name="BonusLabelPanel" Grid.Row="18"
+        <StackPanel x:Name="BonusLabelPanel" Grid.Row="6"
                     Margin="0,0,0,12" Visibility="Collapsed">
             <DockPanel Margin="0,0,0,6">
                 <TextBlock Text="TRACKER CYCLE DE BONUS"
@@ -457,11 +384,11 @@
                        Style="{StaticResource SectionLabelStyle}" Margin="0" />
         </StackPanel>
 
-        <WrapPanel x:Name="DropsPanel" Grid.Row="19"
+        <WrapPanel x:Name="DropsPanel" Grid.Row="7"
                    Orientation="Horizontal"
                    Margin="0,0,0,16" Visibility="Collapsed" />
 
-        <StackPanel x:Name="ResetButtonsPanel" Grid.Row="20"
+        <StackPanel x:Name="ResetButtonsPanel" Grid.Row="8"
                     Orientation="Horizontal"
                     Margin="0,0,0,20" Visibility="Collapsed">
             <Button x:Name="ResetCycleButton"
@@ -476,7 +403,7 @@
         </StackPanel>
 
         <Border x:Name="HistoryBox"
-                Grid.Row="21"
+                Grid.Row="6"
                 Background="{StaticResource BrushBgHistory}"
                 BorderBrush="{StaticResource BrushBorder}"
                 BorderThickness="1" CornerRadius="10"
@@ -751,6 +678,102 @@
       </Grid>
     </ScrollViewer>
 
+    <!-- ══ CONTENU TWITCH ══ -->
+    <ScrollViewer x:Name="TwitchPanel" Grid.Row="1" VerticalScrollBarVisibility="Auto" Visibility="Collapsed">
+      <StackPanel Margin="24,20,24,20" MaxWidth="640" HorizontalAlignment="Left">
+
+        <TextBlock Text="INTÉGRATION TWITCH / NIGHTBOT"
+                   FontFamily="Consolas" FontSize="16" FontWeight="Bold"
+                   Foreground="{StaticResource BrushTextPrimary}"
+                   Margin="0,0,0,4" />
+        <TextBlock Text="Met automatiquement à jour la commande Nightbot avec la liste des manches spéciales à chaque clic ENREGISTRER / +4 / +5."
+                   FontFamily="Consolas" FontSize="12"
+                   Foreground="{StaticResource BrushTextSecondary}"
+                   TextWrapping="Wrap"
+                   Margin="0,0,0,20" />
+
+        <Rectangle Fill="{StaticResource BrushBorder}" Height="1" Margin="0,0,0,20" />
+
+        <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+            <Button x:Name="TwitchConnectButton"
+                    Content="SE CONNECTER À TWITCH"
+                    Style="{StaticResource ResetButtonStyle}"
+                    Margin="0,0,10,0"
+                    Click="TwitchConnectButton_Click" />
+            <Button x:Name="TwitchDisconnectButton"
+                    Content="DÉCONNECTER"
+                    Style="{StaticResource ResetDangerButtonStyle}"
+                    Click="TwitchDisconnectButton_Click" />
+        </StackPanel>
+
+        <TextBlock x:Name="TwitchStatusText"
+                   Text="Non connecté."
+                   FontFamily="Consolas" FontSize="12"
+                   TextWrapping="Wrap"
+                   Foreground="{StaticResource BrushTextSecondary}"
+                   Margin="0,0,0,20" />
+
+        <TextBlock Text="RÉGLAGES"
+                   Style="{StaticResource SectionLabelStyle}"
+                   Margin="0,0,0,10" />
+
+        <StackPanel Orientation="Horizontal" Margin="0,0,0,8">
+            <TextBlock Text="Commande envoyée (met à jour Nightbot via !editcom) :"
+                       VerticalAlignment="Center"
+                       Foreground="{StaticResource BrushTextSecondary}"
+                       FontFamily="Consolas" FontSize="12"
+                       Margin="0,0,10,0" />
+            <TextBox x:Name="TwitchCommandTemplateBox"
+                     Width="220" Height="30"
+                     FontFamily="Consolas" FontSize="13"
+                     VerticalContentAlignment="Center"
+                     Background="{StaticResource BrushBgCard}"
+                     Foreground="{StaticResource BrushTextPrimary}"
+                     BorderBrush="{StaticResource BrushBorder}"
+                     BorderThickness="1"
+                     LostFocus="TwitchCommandTemplateBox_LostFocus" />
+        </StackPanel>
+
+        <CheckBox x:Name="TwitchAutoSendCheck"
+                  Content="Envoyer automatiquement dans le chat au clic ENREGISTRER / +4 / +5"
+                  Foreground="{StaticResource BrushTextSecondary}"
+                  FontFamily="Consolas" FontSize="12"
+                  Margin="0,0,0,16"
+                  Checked="TwitchAutoSendCheck_Changed"
+                  Unchecked="TwitchAutoSendCheck_Changed" />
+
+        <Rectangle Fill="{StaticResource BrushBorder}" Height="1" Margin="0,0,0,16" />
+
+        <TextBlock Text="RÉPONSE DIRECTE (alternative à Nightbot, à ne pas cumuler)"
+                   Style="{StaticResource SectionLabelStyle}"
+                   Margin="0,0,0,10" />
+
+        <StackPanel Orientation="Horizontal" Margin="0,0,0,8">
+            <TextBlock Text="Commande à écouter dans le chat :"
+                       VerticalAlignment="Center"
+                       Foreground="{StaticResource BrushTextSecondary}"
+                       FontFamily="Consolas" FontSize="12"
+                       Margin="0,0,10,0" />
+            <TextBox x:Name="TwitchListenCommandBox"
+                     Width="120" Height="30"
+                     FontFamily="Consolas" FontSize="13"
+                     VerticalContentAlignment="Center"
+                     Background="{StaticResource BrushBgCard}"
+                     Foreground="{StaticResource BrushTextPrimary}"
+                     BorderBrush="{StaticResource BrushBorder}"
+                     BorderThickness="1"
+                     LostFocus="TwitchListenCommandBox_LostFocus" />
+        </StackPanel>
+
+        <CheckBox x:Name="TwitchListenEnabledCheck"
+                  Content="Répondre automatiquement quand un spectateur tape cette commande dans le chat"
+                  Foreground="{StaticResource BrushTextSecondary}"
+                  FontFamily="Consolas" FontSize="12"
+                  Checked="TwitchListenEnabledCheck_Changed"
+                  Unchecked="TwitchListenEnabledCheck_Changed" />
+
+      </StackPanel>
+    </ScrollViewer>
 
     </Grid>
 </Window>

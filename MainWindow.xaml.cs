@@ -1393,7 +1393,8 @@ public partial class MainWindow : Window
         foreach (var (btn, name) in new[] {
             (Bo1TabButton,   "bo1"),
             (Bo2TabButton,   "bo2"),
-            (MultiTabButton, "multi") })
+            (MultiTabButton, "multi"),
+            (TwitchTabButton,"twitch") })
         {
             bool active = name == tab;
             btn.IsChecked  = active;
@@ -1402,14 +1403,16 @@ public partial class MainWindow : Window
             btn.BorderBrush = active ? Brush("BrushAccent") : Brush("BrushBorder");
         }
 
-        Bo1Panel.Visibility   = tab == "bo1"   ? Visibility.Visible : Visibility.Collapsed;
-        Bo2Panel.Visibility   = tab == "bo2"   ? Visibility.Visible : Visibility.Collapsed;
-        MultiPanel.Visibility = tab == "multi" ? Visibility.Visible : Visibility.Collapsed;
+        Bo1Panel.Visibility    = tab == "bo1"    ? Visibility.Visible : Visibility.Collapsed;
+        Bo2Panel.Visibility    = tab == "bo2"    ? Visibility.Visible : Visibility.Collapsed;
+        MultiPanel.Visibility  = tab == "multi"  ? Visibility.Visible : Visibility.Collapsed;
+        TwitchPanel.Visibility = tab == "twitch" ? Visibility.Visible : Visibility.Collapsed;
     }
 
-    private void Bo1TabButton_Click(object sender, RoutedEventArgs e)   => SetActiveTab("bo1");
-    private void Bo2TabButton_Click(object sender, RoutedEventArgs e)   => SetActiveTab("bo2");
-    private void MultiTabButton_Click(object sender, RoutedEventArgs e) => SetActiveTab("multi");
+    private void Bo1TabButton_Click(object sender, RoutedEventArgs e)    => SetActiveTab("bo1");
+    private void Bo2TabButton_Click(object sender, RoutedEventArgs e)    => SetActiveTab("bo2");
+    private void MultiTabButton_Click(object sender, RoutedEventArgs e)  => SetActiveTab("multi");
+    private void TwitchTabButton_Click(object sender, RoutedEventArgs e) => SetActiveTab("twitch");
 
     // ================================================================
     //  BOUTONS DE MAPS

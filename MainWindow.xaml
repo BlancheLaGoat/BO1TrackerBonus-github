@@ -302,11 +302,11 @@
         <!-- TRACKER CYCLE DE BOÎTE                                      -->
         <!-- ═══════════════════════════════════════════════════════════ -->
 
-        <Rectangle x:Name="BoxSeparator" Grid.Row="6"
+        <Rectangle x:Name="BoxSeparator" Grid.Row="9"
                    Fill="{StaticResource BrushBorder}"
                    Margin="0,0,0,16" Visibility="Collapsed" />
 
-        <StackPanel x:Name="BoxLabelPanel" Grid.Row="7"
+        <StackPanel x:Name="BoxLabelPanel" Grid.Row="10"
                     Margin="0,0,0,12" Visibility="Collapsed">
             <DockPanel Margin="0,0,0,6">
                 <TextBlock x:Name="MapTitleText"
@@ -327,11 +327,11 @@
                        Style="{StaticResource SectionLabelStyle}" Margin="0" />
         </StackPanel>
 
-        <WrapPanel x:Name="BoxLocationsPanel" Grid.Row="8"
+        <WrapPanel x:Name="BoxLocationsPanel" Grid.Row="11"
                    Orientation="Horizontal"
                    Margin="0,0,0,16" Visibility="Collapsed" />
 
-        <StackPanel x:Name="BoxResetButtonsPanel" Grid.Row="6"
+        <StackPanel x:Name="BoxResetButtonsPanel" Grid.Row="12"
                     Orientation="Horizontal"
                     Margin="0,0,0,20" Visibility="Collapsed">
             <Button x:Name="ResetBoxCycleButton"
@@ -346,7 +346,7 @@
         </StackPanel>
 
         <Border x:Name="BoxHistoryBox"
-                Grid.Row="7"
+                Grid.Row="13"
                 Background="{StaticResource BrushBgHistory}"
                 BorderBrush="{StaticResource BrushBorder}"
                 BorderThickness="1" CornerRadius="10"
@@ -363,11 +363,11 @@
         <!-- TRACKER CYCLE DE BONUS                                       -->
         <!-- ═══════════════════════════════════════════════════════════ -->
 
-        <Rectangle x:Name="BonusSeparator" Grid.Row="8"
+        <Rectangle x:Name="BonusSeparator" Grid.Row="14"
                    Fill="{StaticResource BrushBorder}"
                    Margin="0,0,0,16" Visibility="Collapsed" />
 
-        <StackPanel x:Name="BonusLabelPanel" Grid.Row="6"
+        <StackPanel x:Name="BonusLabelPanel" Grid.Row="15"
                     Margin="0,0,0,12" Visibility="Collapsed">
             <DockPanel Margin="0,0,0,6">
                 <TextBlock Text="TRACKER CYCLE DE BONUS"
@@ -384,11 +384,11 @@
                        Style="{StaticResource SectionLabelStyle}" Margin="0" />
         </StackPanel>
 
-        <WrapPanel x:Name="DropsPanel" Grid.Row="7"
+        <WrapPanel x:Name="DropsPanel" Grid.Row="16"
                    Orientation="Horizontal"
                    Margin="0,0,0,16" Visibility="Collapsed" />
 
-        <StackPanel x:Name="ResetButtonsPanel" Grid.Row="8"
+        <StackPanel x:Name="ResetButtonsPanel" Grid.Row="17"
                     Orientation="Horizontal"
                     Margin="0,0,0,20" Visibility="Collapsed">
             <Button x:Name="ResetCycleButton"
@@ -403,7 +403,7 @@
         </StackPanel>
 
         <Border x:Name="HistoryBox"
-                Grid.Row="6"
+                Grid.Row="18"
                 Background="{StaticResource BrushBgHistory}"
                 BorderBrush="{StaticResource BrushBorder}"
                 BorderThickness="1" CornerRadius="10"

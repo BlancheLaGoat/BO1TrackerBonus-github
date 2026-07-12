@@ -5,6 +5,9 @@ on:
     branches: [ "main" ]
   workflow_dispatch:      # permet aussi de lancer la compilation manuellement depuis l'onglet Actions
 
+permissions:
+  contents: write        # nécessaire pour pouvoir créer/mettre à jour une Release
+
 jobs:
   build:
     runs-on: windows-latest   # WPF ne peut être compilé que sur Windows
@@ -28,8 +31,16 @@ jobs:
           -p:IncludeNativeLibrariesForSelfExtract=true
           -o publish
 
-      - name: Mettre le .exe à disposition en téléchargement
+      - name: Mettre le .exe à disposition en téléchargement (artifact interne)
         uses: actions/upload-artifact@v4
         with:
           name: BO1Tracker-windows
           path: publish/BO1Tracker.exe
+
+      - name: Publier/mettre à jour la Release publique "latest"
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: latest
+          name: "Dernière version"
+          body: "Compilation automatique la plus récente. Lien direct ci-dessous."
+          files: publish/BO1Tracker.exe

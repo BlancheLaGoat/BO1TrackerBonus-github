@@ -919,14 +919,7 @@ public partial class MainWindow : Window
                     btn.IsChecked = (id == map.Id);
                 MapTitleText.Text = map.Name.ToUpper();
 
-                bool hasBox = map.BoxLocations.Count > 0;
-                BoxSeparator.Visibility        = hasBox ? Visibility.Visible : Visibility.Collapsed;
-                BoxLabelPanel.Visibility        = hasBox ? Visibility.Visible : Visibility.Collapsed;
-                BoxLocationsPanel.Visibility    = hasBox ? Visibility.Visible : Visibility.Collapsed;
-                BoxResetButtonsPanel.Visibility = hasBox ? Visibility.Visible : Visibility.Collapsed;
-                BoxHistoryBox.Visibility        = hasBox ? Visibility.Visible : Visibility.Collapsed;
-                BonusSeparator.Visibility       = Visibility.Visible;
-                BonusLabelPanel.Visibility      = Visibility.Visible;
+                ApplyBoxVisibility(map.BoxLocations.Count > 0);
                 DropsPanel.Visibility           = Visibility.Visible;
                 ResetButtonsPanel.Visibility    = Visibility.Visible;
                 HistoryBox.Visibility           = Visibility.Visible;
@@ -1014,6 +1007,9 @@ public partial class MainWindow : Window
     //  COLLAPSE / EXPAND — CHOIX DE LA MAP
     // ================================================================
     private bool _mapExpanded = true;
+    private bool _boxExpanded = true;
+    private bool _bonusExpanded = true;
+    private bool _currentMapHasBox = false;
 
     private void MapHeader_Click(object sender, System.Windows.Input.MouseButtonEventArgs e)
     {
@@ -1022,6 +1018,30 @@ public partial class MainWindow : Window
         MapChevron.Text              = _mapExpanded ? "▼" : "▶";
         MapSelectedInline.Visibility = _mapExpanded || _currentMap == null
             ? Visibility.Collapsed : Visibility.Visible;
+    }
+
+    /// <summary>Applique la visibilité de la section Boîte : header visible si la map a une boîte,
+    /// contenu visible seulement si en plus la section est dépliée.</summary>
+    private void ApplyBoxVisibility(bool hasBox)
+    {
+        _currentMapHasBox = hasBox;
+        BoxSeparator.Visibility   = hasBox ? Visibility.Visible : Visibility.Collapsed;
+        BoxHeaderGrid.Visibility  = hasBox ? Visibility.Visible : Visibility.Collapsed;
+        BoxContentPanel.Visibility = (hasBox && _boxExpanded) ? Visibility.Visible : Visibility.Collapsed;
+        BoxChevron.Text = _boxExpanded ? "▼" : "▶";
+    }
+
+    private void BoxHeader_Click(object sender, System.Windows.Input.MouseButtonEventArgs e)
+    {
+        _boxExpanded = !_boxExpanded;
+        ApplyBoxVisibility(_currentMapHasBox);
+    }
+
+    private void BonusHeader_Click(object sender, System.Windows.Input.MouseButtonEventArgs e)
+    {
+        _bonusExpanded = !_bonusExpanded;
+        BonusContentPanel.Visibility = _bonusExpanded ? Visibility.Visible : Visibility.Collapsed;
+        BonusChevron.Text = _bonusExpanded ? "▼" : "▶";
     }
 
     // ================================================================
@@ -1255,13 +1275,7 @@ public partial class MainWindow : Window
                     _clickOrder = state.ClickOrder;
 
                     bool hasBox = map.BoxLocations.Count > 0;
-                    BoxSeparator.Visibility        = hasBox ? Visibility.Visible : Visibility.Collapsed;
-                    BoxLabelPanel.Visibility        = hasBox ? Visibility.Visible : Visibility.Collapsed;
-                    BoxLocationsPanel.Visibility    = hasBox ? Visibility.Visible : Visibility.Collapsed;
-                    BoxResetButtonsPanel.Visibility = hasBox ? Visibility.Visible : Visibility.Collapsed;
-                    BoxHistoryBox.Visibility        = hasBox ? Visibility.Visible : Visibility.Collapsed;
-                    BonusSeparator.Visibility       = Visibility.Visible;
-                    BonusLabelPanel.Visibility      = Visibility.Visible;
+                    ApplyBoxVisibility(hasBox);
                     DropsPanel.Visibility           = Visibility.Visible;
                     ResetButtonsPanel.Visibility    = Visibility.Visible;
                     HistoryBox.Visibility           = Visibility.Visible;
@@ -1449,13 +1463,7 @@ public partial class MainWindow : Window
         MapTitleText.Text = map.Name.ToUpper();
 
         bool hasBox = map.BoxLocations.Count > 0;
-        BoxSeparator.Visibility        = hasBox ? Visibility.Visible : Visibility.Collapsed;
-        BoxLabelPanel.Visibility        = hasBox ? Visibility.Visible : Visibility.Collapsed;
-        BoxLocationsPanel.Visibility    = hasBox ? Visibility.Visible : Visibility.Collapsed;
-        BoxResetButtonsPanel.Visibility = hasBox ? Visibility.Visible : Visibility.Collapsed;
-        BoxHistoryBox.Visibility        = hasBox ? Visibility.Visible : Visibility.Collapsed;
-        BonusSeparator.Visibility       = Visibility.Visible;
-        BonusLabelPanel.Visibility      = Visibility.Visible;
+        ApplyBoxVisibility(hasBox);
         DropsPanel.Visibility           = Visibility.Visible;
         ResetButtonsPanel.Visibility    = Visibility.Visible;
         HistoryBox.Visibility           = Visibility.Visible;

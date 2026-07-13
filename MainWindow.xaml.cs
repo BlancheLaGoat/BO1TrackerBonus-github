@@ -273,8 +273,8 @@ public partial class MainWindow : Window
         }
         if (_dogRoundHistory.Count == 0) return;
 
-        // Liste triée du plus petit au plus grand : "5, 10, 14, 19, 23, 28, 32"
-        string roundsList = string.Join(", ", _dogRoundHistory.OrderBy(r => r));
+        // Liste triée du plus petit au plus grand, avec * sur les manches spéciales : "5, 10, 163*, 165*"
+        string roundsList = string.Join(", ", _dogRoundHistory.OrderBy(r => r).Select(FormatRound));
 
         string message;
         try { message = string.Format(_twitchConfig.TwitchCommandTemplate, roundsList); }
@@ -1606,14 +1606,28 @@ public partial class MainWindow : Window
         if (_currentDogRound is int current)
         {
             DogNextRoundPanel.Visibility = Visibility.Visible;
-            DogNext4Text.Text = (current + 4).ToString();
-            DogNext5Text.Text = (current + 5).ToString();
+            DogNext4Text.Text = FormatRound(current + 4);
+            DogNext5Text.Text = FormatRound(current + 5);
         }
         else
         {
             DogNextRoundPanel.Visibility = Visibility.Collapsed;
         }
     }
+
+    // ================================================================
+    //  MANCHES "SPÉCIALES" MARQUÉES D'UN ASTÉRISQUE (*)
+    // ================================================================
+    private static readonly HashSet<int> StarredRounds = new()
+    {
+        163, 165, 167, 169, 171, 173, 175, 177, 179, 181, 183, 185, 188, 189,
+        191, 194, 196, 197, 199, 202, 204, 205, 207, 210, 211, 214, 216, 217,
+        219, 222, 224, 225, 228, 229, 231, 234, 236, 237, 239, 242, 243, 246,
+        248, 249, 252, 253, 255,
+    };
+
+    /// <summary>Affiche "163*" si la manche fait partie de la liste, sinon "163".</summary>
+    private static string FormatRound(int round) => StarredRounds.Contains(round) ? $"{round}*" : $"{round}";
 
     private void RenderDogHistory()
     {
@@ -1637,7 +1651,7 @@ public partial class MainWindow : Window
             var stack = new StackPanel { Orientation = Orientation.Horizontal };
             if (isCurrent)
                 stack.Children.Add(new TextBlock { Text = "● ", FontFamily = new FontFamily("Consolas"), FontSize = 11, Foreground = Brush("BrushAccent"), VerticalAlignment = VerticalAlignment.Center });
-            stack.Children.Add(new TextBlock { Text = $"{round}", FontFamily = new FontFamily("Consolas"), FontSize = 13, FontWeight = isCurrent ? FontWeights.Bold : FontWeights.Normal, Foreground = isCurrent ? Brush("BrushAccentLight") : Brush("BrushTextSecondary"), VerticalAlignment = VerticalAlignment.Center });
+            stack.Children.Add(new TextBlock { Text = FormatRound(round), FontFamily = new FontFamily("Consolas"), FontSize = 13, FontWeight = isCurrent ? FontWeights.Bold : FontWeights.Normal, Foreground = isCurrent ? Brush("BrushAccentLight") : Brush("BrushTextSecondary"), VerticalAlignment = VerticalAlignment.Center });
             badge.Child = stack;
             badge.MouseLeftButtonUp += (_, _) => { _currentDogRound = round; UpdateDogRoundDisplay(); RenderDogHistory(); SaveState(); };
             DogHistoryPanel.Children.Add(badge);
